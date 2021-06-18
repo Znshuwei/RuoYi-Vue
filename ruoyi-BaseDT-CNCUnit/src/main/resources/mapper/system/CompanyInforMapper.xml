@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CompanyInforMapper">
+    
+    <resultMap type="CompanyInfor" id="CompanyInforResult">
+        <result property="companyId"    column="Company_Id"    />
+        <result property="companyCode"    column="Company_Code"    />
+        <result property="companyName"    column="Company_Name"    />
+        <result property="companyProvince"    column="Company_Province"    />
+        <result property="companyCity"    column="Company_City"    />
+        <result property="companyConty"    column="Company_Conty"    />
+        <result property="companyAddress"    column="Company_Address"    />
+        <result property="companyLinkmain"    column="Company_LinkMain"    />
+        <result property="companyPhone"    column="Company_Phone"    />
+        <result property="companySetuptime"    column="Company_SetUpTime"    />
+        <result property="companyNature"    column="Company_Nature"    />
+        <result property="companyRegmoney"    column="Company_RegMoney"    />
+        <result property="companyFxedassets"    column="Company_FxedAssets"    />
+        <result property="companyUrl"    column="Company_URL"    />
+        <result property="companyEmail"    column="Company_EMail"    />
+        <result property="companyCreateperson"    column="Company_CreatePerson"    />
+        <result property="companyCreatedate"    column="Company_Createdate"    />
+        <result property="companyDelflag"    column="Company_DelFlag"    />
+    </resultMap>
+
+    <sql id="selectCompanyInforVo">
+        select Company_Id, Company_Code, Company_Name, Company_Province, Company_City, Company_Conty, Company_Address, Company_LinkMain, Company_Phone, Company_SetUpTime, Company_Nature, Company_RegMoney, Company_FxedAssets, Company_URL, Company_EMail, Company_CreatePerson, Company_Createdate, Company_DelFlag from company_infor
+    </sql>
+
+    <select id="selectCompanyInforList" parameterType="CompanyInfor" resultMap="CompanyInforResult">
+        <include refid="selectCompanyInforVo"/>
+        <where>  
+            <if test="companyCode != null  and companyCode != ''"> and Company_Code = #{companyCode}</if>
+            <if test="companyName != null  and companyName != ''"> and Company_Name like concat('%', #{companyName}, '%')</if>
+            <if test="companyProvince != null  and companyProvince != ''"> and Company_Province = #{companyProvince}</if>
+            <if test="companyCity != null  and companyCity != ''"> and Company_City = #{companyCity}</if>
+            <if test="companyConty != null  and companyConty != ''"> and Company_Conty = #{companyConty}</if>
+        </where>
+    </select>
+    
+    <select id="selectCompanyInforById" parameterType="Integer" resultMap="CompanyInforResult">
+        <include refid="selectCompanyInforVo"/>
+        where Company_Id = #{companyId}
+    </select>
+        
+    <insert id="insertCompanyInfor" parameterType="CompanyInfor" useGeneratedKeys="true" keyProperty="companyId">
+        insert into company_infor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyCode != null">Company_Code,</if>
+            <if test="companyName != null and companyName != ''">Company_Name,</if>
+            <if test="companyProvince != null and companyProvince != ''">Company_Province,</if>
+            <if test="companyCity != null and companyCity != ''">Company_City,</if>
+            <if test="companyConty != null and companyConty != ''">Company_Conty,</if>
+            <if test="companyAddress != null and companyAddress != ''">Company_Address,</if>
+            <if test="companyLinkmain != null and companyLinkmain != ''">Company_LinkMain,</if>
+            <if test="companyPhone != null and companyPhone != ''">Company_Phone,</if>
+            <if test="companySetuptime != null">Company_SetUpTime,</if>
+            <if test="companyNature != null">Company_Nature,</if>
+            <if test="companyRegmoney != null">Company_RegMoney,</if>
+            <if test="companyFxedassets != null">Company_FxedAssets,</if>
+            <if test="companyUrl != null">Company_URL,</if>
+            <if test="companyEmail != null">Company_EMail,</if>
+            <if test="companyCreateperson != null">Company_CreatePerson,</if>
+            <if test="companyCreatedate != null">Company_Createdate,</if>
+            <if test="companyDelflag != null">Company_DelFlag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyCode != null">#{companyCode},</if>
+            <if test="companyName != null and companyName != ''">#{companyName},</if>
+            <if test="companyProvince != null and companyProvince != ''">#{companyProvince},</if>
+            <if test="companyCity != null and companyCity != ''">#{companyCity},</if>
+            <if test="companyConty != null and companyConty != ''">#{companyConty},</if>
+            <if test="companyAddress != null and companyAddress != ''">#{companyAddress},</if>
+            <if test="companyLinkmain != null and companyLinkmain != ''">#{companyLinkmain},</if>
+            <if test="companyPhone != null and companyPhone != ''">#{companyPhone},</if>
+            <if test="companySetuptime != null">#{companySetuptime},</if>
+            <if test="companyNature != null">#{companyNature},</if>
+            <if test="companyRegmoney != null">#{companyRegmoney},</if>
+            <if test="companyFxedassets != null">#{companyFxedassets},</if>
+            <if test="companyUrl != null">#{companyUrl},</if>
+            <if test="companyEmail != null">#{companyEmail},</if>
+            <if test="companyCreateperson != null">#{companyCreateperson},</if>
+            <if test="companyCreatedate != null">#{companyCreatedate},</if>
+            <if test="companyDelflag != null">#{companyDelflag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCompanyInfor" parameterType="CompanyInfor">
+        update company_infor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="companyCode != null">Company_Code = #{companyCode},</if>
+            <if test="companyName != null and companyName != ''">Company_Name = #{companyName},</if>
+            <if test="companyProvince != null and companyProvince != ''">Company_Province = #{companyProvince},</if>
+            <if test="companyCity != null and companyCity != ''">Company_City = #{companyCity},</if>
+            <if test="companyConty != null and companyConty != ''">Company_Conty = #{companyConty},</if>
+            <if test="companyAddress != null and companyAddress != ''">Company_Address = #{companyAddress},</if>
+            <if test="companyLinkmain != null and companyLinkmain != ''">Company_LinkMain = #{companyLinkmain},</if>
+            <if test="companyPhone != null and companyPhone != ''">Company_Phone = #{companyPhone},</if>
+            <if test="companySetuptime != null">Company_SetUpTime = #{companySetuptime},</if>
+            <if test="companyNature != null">Company_Nature = #{companyNature},</if>
+            <if test="companyRegmoney != null">Company_RegMoney = #{companyRegmoney},</if>
+            <if test="companyFxedassets != null">Company_FxedAssets = #{companyFxedassets},</if>
+            <if test="companyUrl != null">Company_URL = #{companyUrl},</if>
+            <if test="companyEmail != null">Company_EMail = #{companyEmail},</if>
+            <if test="companyCreateperson != null">Company_CreatePerson = #{companyCreateperson},</if>
+            <if test="companyCreatedate != null">Company_Createdate = #{companyCreatedate},</if>
+            <if test="companyDelflag != null">Company_DelFlag = #{companyDelflag},</if>
+        </trim>
+        where Company_Id = #{companyId}
+    </update>
+
+    <delete id="deleteCompanyInforById" parameterType="Integer">
+        delete from company_infor where Company_Id = #{companyId}
+    </delete>
+
+    <delete id="deleteCompanyInforByIds" parameterType="String">
+        delete from company_infor where Company_Id in 
+        <foreach item="companyId" collection="array" open="(" separator="," close=")">
+            #{companyId}
+        </foreach>
+    </delete>
+</mapper>
