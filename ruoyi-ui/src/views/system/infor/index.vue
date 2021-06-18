@@ -19,28 +19,19 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="省" prop="companyProvince">
+      <el-form-item label="地区" prop="companyArea">
         <el-input
-          v-model="queryParams.companyProvince"
-          placeholder="请输入省"
+          v-model="queryParams.companyArea"
+          placeholder="请输入地区"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="市" prop="companyCity">
+      <el-form-item label="联系人" prop="companyLinkmain">
         <el-input
-          v-model="queryParams.companyCity"
-          placeholder="请输入市"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="县" prop="companyConty">
-        <el-input
-          v-model="queryParams.companyConty"
-          placeholder="请输入县"
+          v-model="queryParams.companyLinkmain"
+          placeholder="请输入联系人"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -60,7 +51,7 @@
           icon="el-icon-plus"
           size="mini"
           @click="handleAdd"
-          v-hasPermi="['system:company_infor:add']"
+          v-hasPermi="['system:infor:add']"
         >新增</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -71,7 +62,7 @@
           size="mini"
           :disabled="single"
           @click="handleUpdate"
-          v-hasPermi="['system:company_infor:edit']"
+          v-hasPermi="['system:infor:edit']"
         >修改</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -82,7 +73,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['system:company_infor:remove']"
+          v-hasPermi="['system:infor:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -93,20 +84,18 @@
           size="mini"
 		  :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['system:company_infor:export']"
+          v-hasPermi="['system:infor:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="company_inforList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="inforList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="企业ID" align="center" prop="companyId" />
       <el-table-column label="企业编码" align="center" prop="companyCode" />
       <el-table-column label="企业名称" align="center" prop="companyName" />
-      <el-table-column label="省" align="center" prop="companyProvince" />
-      <el-table-column label="市" align="center" prop="companyCity" />
-      <el-table-column label="县" align="center" prop="companyConty" />
+      <el-table-column label="地区" align="center" prop="companyArea" />
       <el-table-column label="地址" align="center" prop="companyAddress" />
       <el-table-column label="联系人" align="center" prop="companyLinkmain" />
       <el-table-column label="联系方式" align="center" prop="companyPhone" />
@@ -134,14 +123,14 @@
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
-            v-hasPermi="['system:company_infor:edit']"
+            v-hasPermi="['system:infor:edit']"
           >修改</el-button>
           <el-button
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
-            v-hasPermi="['system:company_infor:remove']"
+            v-hasPermi="['system:infor:remove']"
           >删除</el-button>
         </template>
       </el-table-column>
@@ -164,19 +153,13 @@
         <el-form-item label="企业名称" prop="companyName">
           <el-input v-model="form.companyName" placeholder="请输入企业名称" />
         </el-form-item>
-        <el-form-item label="省" prop="companyProvince">
-<!--          <el-input v-model="form.companyProvince" placeholder="请输入省" />-->
-            <el-cascader
-              v-model="value"
-              :options="city"
-              @change="handleChange">
-            </el-cascader>
-        </el-form-item>
-        <el-form-item label="市" prop="companyCity">
-          <el-input v-model="form.companyCity" placeholder="请输入市" />
-        </el-form-item>
-        <el-form-item label="县" prop="companyConty">
-          <el-input v-model="form.companyConty" placeholder="请输入县" />
+        <el-form-item label="地区" prop="companyArea">
+<!--          <el-input v-model="form.companyArea" placeholder="请输入地区" />-->
+          <el-cascader
+            v-model="value"
+            :options="city"
+            @change="handleChange">
+          </el-cascader>
         </el-form-item>
         <el-form-item label="地址" prop="companyAddress">
           <el-input v-model="form.companyAddress" placeholder="请输入地址" />
@@ -234,14 +217,15 @@
 </template>
 
 <script>
-import { listCompany_infor, getCompany_infor, delCompany_infor, addCompany_infor, updateCompany_infor, exportCompany_infor } from "@/api/system/company_infor";
+import { listInfor, getInfor, delInfor, addInfor, updateInfor, exportInfor } from "@/api/system/infor";
 import axios from "axios";
 
 export default {
-  name: "Company_infor",
+  name: "Infor",
   components: {
   },
   data() {
+
     return {
 
       city: null,
@@ -262,7 +246,7 @@ export default {
       // 总条数
       total: 0,
       // 企业管理表格数据
-      company_inforList: [],
+      inforList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -273,9 +257,8 @@ export default {
         pageSize: 10,
         companyCode: null,
         companyName: null,
-        companyProvince: null,
-        companyCity: null,
-        companyConty: null,
+        companyArea: null,
+        companyLinkmain: null,
       },
       // 表单参数
       form: {},
@@ -284,14 +267,8 @@ export default {
         companyName: [
           { required: true, message: "企业名称不能为空", trigger: "blur" }
         ],
-        companyProvince: [
-          { required: true, message: "省不能为空", trigger: "blur" }
-        ],
-        companyCity: [
-          { required: true, message: "市不能为空", trigger: "blur" }
-        ],
-        companyConty: [
-          { required: true, message: "县不能为空", trigger: "blur" }
+        companyArea: [
+          { required: true, message: "地区不能为空", trigger: "blur" }
         ],
         companyAddress: [
           { required: true, message: "地址不能为空", trigger: "blur" }
@@ -313,15 +290,11 @@ export default {
     axios.get('/2020年最新全国行政区划element多级选择value-code.json').then(response => this.city = response.data);
   },
   methods: {
-
-    handleChange(value) {
-      console.log(value);},
-
     /** 查询企业管理列表 */
     getList() {
       this.loading = true;
-      listCompany_infor(this.queryParams).then(response => {
-        this.company_inforList = response.rows;
+      listInfor(this.queryParams).then(response => {
+        this.inforList = response.rows;
         this.total = response.total;
         this.loading = false;
       });
@@ -337,9 +310,7 @@ export default {
         companyId: null,
         companyCode: null,
         companyName: null,
-        companyProvince: null,
-        companyCity: null,
-        companyConty: null,
+        companyArea: null,
         companyAddress: null,
         companyLinkmain: null,
         companyPhone: null,
@@ -381,7 +352,7 @@ export default {
     handleUpdate(row) {
       this.reset();
       const companyId = row.companyId || this.ids
-      getCompany_infor(companyId).then(response => {
+      getInfor(companyId).then(response => {
         this.form = response.data;
         this.open = true;
         this.title = "修改企业管理";
@@ -392,13 +363,13 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.companyId != null) {
-            updateCompany_infor(this.form).then(response => {
+            updateInfor(this.form).then(response => {
               this.msgSuccess("修改成功");
               this.open = false;
               this.getList();
             });
           } else {
-            addCompany_infor(this.form).then(response => {
+            addInfor(this.form).then(response => {
               this.msgSuccess("新增成功");
               this.open = false;
               this.getList();
@@ -415,7 +386,7 @@ export default {
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return delCompany_infor(companyIds);
+          return delInfor(companyIds);
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");
@@ -430,7 +401,7 @@ export default {
           type: "warning"
         }).then(() => {
           this.exportLoading = true;
-          return exportCompany_infor(queryParams);
+          return exportInfor(queryParams);
         }).then(response => {
           this.download(response.msg);
           this.exportLoading = false;
