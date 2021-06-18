@@ -146,7 +146,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -165,7 +165,12 @@
           <el-input v-model="form.companyName" placeholder="请输入企业名称" />
         </el-form-item>
         <el-form-item label="省" prop="companyProvince">
-          <el-input v-model="form.companyProvince" placeholder="请输入省" />
+<!--          <el-input v-model="form.companyProvince" placeholder="请输入省" />-->
+            <el-cascader
+              v-model="value"
+              :options="city"
+              @change="handleChange">
+            </el-cascader>
         </el-form-item>
         <el-form-item label="市" prop="companyCity">
           <el-input v-model="form.companyCity" placeholder="请输入市" />
@@ -230,6 +235,7 @@
 
 <script>
 import { listCompany_infor, getCompany_infor, delCompany_infor, addCompany_infor, updateCompany_infor, exportCompany_infor } from "@/api/system/company_infor";
+import axios from "axios";
 
 export default {
   name: "Company_infor",
@@ -237,6 +243,10 @@ export default {
   },
   data() {
     return {
+
+      city: null,
+      value: [],
+
       // 遮罩层
       loading: true,
       // 导出遮罩层
@@ -300,8 +310,13 @@ export default {
   },
   created() {
     this.getList();
+    axios.get('/2020年最新全国行政区划element多级选择value-code.json').then(response => this.city = response.data);
   },
   methods: {
+
+    handleChange(value) {
+      console.log(value);},
+
     /** 查询企业管理列表 */
     getList() {
       this.loading = true;
