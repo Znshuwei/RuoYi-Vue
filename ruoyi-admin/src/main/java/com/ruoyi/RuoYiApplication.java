@@ -3,6 +3,7 @@ package com.ruoyi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import com.ruoyi.cncunit.TestService;
 
 /**
  * 启动程序
@@ -26,5 +27,6 @@ public class RuoYiApplication
                 " |  | \\ `'   /|   `-'  /           \n" +
                 " |  |  \\    /  \\      /           \n" +
                 " ''-'   `'-'    `-..-'              ");
+        System.out.println(TestService.helloTest());
     }
 }

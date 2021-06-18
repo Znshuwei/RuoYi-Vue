@@ -61,6 +61,15 @@
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-BaseDT-CNCUnit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-BaseDT-CNCUnit</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
