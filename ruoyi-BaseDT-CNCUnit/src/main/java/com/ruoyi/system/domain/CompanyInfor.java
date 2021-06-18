@@ -28,17 +28,9 @@ public class CompanyInfor extends BaseEntity
     @Excel(name = "企业名称")
     private String companyName;
 
-    /** 省 */
-    @Excel(name = "省")
-    private String companyProvince;
-
-    /** 市 */
-    @Excel(name = "市")
-    private String companyCity;
-
-    /** 县 */
-    @Excel(name = "县")
-    private String companyConty;
+    /** 地区 */
+    @Excel(name = "地区")
+    private String companyArea;
 
     /** 地址 */
     @Excel(name = "地址")
@@ -117,32 +109,14 @@ public class CompanyInfor extends BaseEntity
     {
         return companyName;
     }
-    public void setCompanyProvince(String companyProvince) 
+    public void setCompanyArea(String companyArea) 
     {
-        this.companyProvince = companyProvince;
+        this.companyArea = companyArea;
     }
 
-    public String getCompanyProvince() 
+    public String getCompanyArea() 
     {
-        return companyProvince;
-    }
-    public void setCompanyCity(String companyCity) 
-    {
-        this.companyCity = companyCity;
-    }
-
-    public String getCompanyCity() 
-    {
-        return companyCity;
-    }
-    public void setCompanyConty(String companyConty) 
-    {
-        this.companyConty = companyConty;
-    }
-
-    public String getCompanyConty() 
-    {
-        return companyConty;
+        return companyArea;
     }
     public void setCompanyAddress(String companyAddress) 
     {
@@ -259,9 +233,7 @@ public class CompanyInfor extends BaseEntity
             .append("companyId", getCompanyId())
             .append("companyCode", getCompanyCode())
             .append("companyName", getCompanyName())
-            .append("companyProvince", getCompanyProvince())
-            .append("companyCity", getCompanyCity())
-            .append("companyConty", getCompanyConty())
+            .append("companyArea", getCompanyArea())
             .append("companyAddress", getCompanyAddress())
             .append("companyLinkmain", getCompanyLinkmain())
             .append("companyPhone", getCompanyPhone())

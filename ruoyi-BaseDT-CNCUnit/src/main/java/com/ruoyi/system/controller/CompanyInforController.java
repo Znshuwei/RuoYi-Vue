@@ -27,7 +27,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2021-06-18
  */
 @RestController
-@RequestMapping("/system/company_infor")
+@RequestMapping("/system/infor")
 public class CompanyInforController extends BaseController
 {
     @Autowired
@@ -36,7 +36,7 @@ public class CompanyInforController extends BaseController
     /**
      * 查询企业管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:company_infor:list')")
+    @PreAuthorize("@ss.hasPermi('system:infor:list')")
     @GetMapping("/list")
     public TableDataInfo list(CompanyInfor companyInfor)
     {
@@ -48,7 +48,7 @@ public class CompanyInforController extends BaseController
     /**
      * 导出企业管理列表
      */
-    @PreAuthorize("@ss.hasPermi('system:company_infor:export')")
+    @PreAuthorize("@ss.hasPermi('system:infor:export')")
     @Log(title = "企业管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(CompanyInfor companyInfor)
@@ -61,7 +61,7 @@ public class CompanyInforController extends BaseController
     /**
      * 获取企业管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('system:company_infor:query')")
+    @PreAuthorize("@ss.hasPermi('system:infor:query')")
     @GetMapping(value = "/{companyId}")
     public AjaxResult getInfo(@PathVariable("companyId") Integer companyId)
     {
@@ -71,7 +71,7 @@ public class CompanyInforController extends BaseController
     /**
      * 新增企业管理
      */
-    @PreAuthorize("@ss.hasPermi('system:company_infor:add')")
+    @PreAuthorize("@ss.hasPermi('system:infor:add')")
     @Log(title = "企业管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CompanyInfor companyInfor)
@@ -82,7 +82,7 @@ public class CompanyInforController extends BaseController
     /**
      * 修改企业管理
      */
-    @PreAuthorize("@ss.hasPermi('system:company_infor:edit')")
+    @PreAuthorize("@ss.hasPermi('system:infor:edit')")
     @Log(title = "企业管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CompanyInfor companyInfor)
@@ -93,7 +93,7 @@ public class CompanyInforController extends BaseController
     /**
      * 删除企业管理
      */
-    @PreAuthorize("@ss.hasPermi('system:company_infor:remove')")
+    @PreAuthorize("@ss.hasPermi('system:infor:remove')")
     @Log(title = "企业管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{companyIds}")
     public AjaxResult remove(@PathVariable Integer[] companyIds)
