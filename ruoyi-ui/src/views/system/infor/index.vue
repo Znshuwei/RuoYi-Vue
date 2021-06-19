@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="企业编码" prop="companyCode">
+      <el-form-item label="企业ID" prop="companyId">
         <el-input
-          v-model="queryParams.companyCode"
-          placeholder="请输入企业编码"
+          v-model="queryParams.companyId"
+          placeholder="请输入企业ID"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
@@ -93,7 +93,6 @@
     <el-table v-loading="loading" :data="inforList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="企业ID" align="center" prop="companyId" />
-      <el-table-column label="企业编码" align="center" prop="companyCode" />
       <el-table-column label="企业名称" align="center" prop="companyName" />
       <el-table-column label="地区" align="center" prop="companyArea" />
       <el-table-column label="地址" align="center" prop="companyAddress" />
@@ -110,12 +109,11 @@
       <el-table-column label="网址" align="center" prop="companyUrl" />
       <el-table-column label="电子邮件地址" align="center" prop="companyEmail" />
       <el-table-column label="注册人" align="center" prop="companyCreateperson" />
-      <el-table-column label="创建时间" align="center" prop="companyCreatedate" width="180">
+      <el-table-column label="注册时间" align="center" prop="companyCreatedate" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.companyCreatedate, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="删除标志" align="center" prop="companyDelflag" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -144,20 +142,18 @@
       @pagination="getList"
     />
 
-    <!-- 添加或修改企业管理对话框 -->
+    <!-- 添加或修改用户管理对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="企业编码" prop="companyCode">
-          <el-input v-model="form.companyCode" placeholder="请输入企业编码" />
-        </el-form-item>
         <el-form-item label="企业名称" prop="companyName">
           <el-input v-model="form.companyName" placeholder="请输入企业名称" />
         </el-form-item>
         <el-form-item label="地区" prop="companyArea">
 <!--          <el-input v-model="form.companyArea" placeholder="请输入地区" />-->
           <el-cascader
-            v-model="value"
+            v-model="form.companyArea"
             :options="city"
+            :props="{ expandTrigger: 'hover',value:'cat_id',label:'cat_name'}"
             @change="handleChange">
           </el-cascader>
         </el-form-item>
@@ -196,17 +192,6 @@
         <el-form-item label="注册人" prop="companyCreateperson">
           <el-input v-model="form.companyCreateperson" placeholder="请输入注册人" />
         </el-form-item>
-        <el-form-item label="创建时间" prop="companyCreatedate">
-          <el-date-picker clearable size="small"
-            v-model="form.companyCreatedate"
-            type="date"
-            value-format="yyyy-MM-dd"
-            placeholder="选择创建时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="删除标志" prop="companyDelflag">
-          <el-input v-model="form.companyDelflag" placeholder="请输入删除标志" />
-        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -225,7 +210,6 @@ export default {
   components: {
   },
   data() {
-
     return {
 
       city: null,
@@ -245,7 +229,7 @@ export default {
       showSearch: true,
       // 总条数
       total: 0,
-      // 企业管理表格数据
+      // 用户管理表格数据
       inforList: [],
       // 弹出层标题
       title: "",
@@ -255,7 +239,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        companyCode: null,
+        companyId: null,
         companyName: null,
         companyArea: null,
         companyLinkmain: null,
@@ -290,7 +274,10 @@ export default {
     axios.get('/2020年最新全国行政区划element多级选择value-code.json').then(response => this.city = response.data);
   },
   methods: {
-    /** 查询企业管理列表 */
+
+    handleChange(value) {console.log(value);},
+
+    /** 查询用户管理列表 */
     getList() {
       this.loading = true;
       listInfor(this.queryParams).then(response => {
@@ -346,7 +333,7 @@ export default {
     handleAdd() {
       this.reset();
       this.open = true;
-      this.title = "添加企业管理";
+      this.title = "添加用户管理";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
@@ -355,7 +342,7 @@ export default {
       getInfor(companyId).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改企业管理";
+        this.title = "修改用户管理";
       });
     },
     /** 提交按钮 */
@@ -367,7 +354,7 @@ export default {
               this.msgSuccess("修改成功");
               this.open = false;
               this.getList();
-            });
+            },);
           } else {
             addInfor(this.form).then(response => {
               this.msgSuccess("新增成功");
@@ -381,7 +368,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const companyIds = row.companyId || this.ids;
-      this.$confirm('是否确认删除企业管理编号为"' + companyIds + '"的数据项?', "警告", {
+      this.$confirm('是否确认删除用户管理编号为"' + companyIds + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
@@ -395,7 +382,7 @@ export default {
     /** 导出按钮操作 */
     handleExport() {
       const queryParams = this.queryParams;
-      this.$confirm('是否确认导出所有企业管理数据项?', "警告", {
+      this.$confirm('是否确认导出所有用户管理数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"

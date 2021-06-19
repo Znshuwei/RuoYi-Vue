@@ -8,7 +8,7 @@ import com.ruoyi.system.domain.CompanyInfor;
 import com.ruoyi.system.service.ICompanyInforService;
 
 /**
- * 企业管理Service业务层处理
+ * 用户管理Service业务层处理
  * 
  * @author ruoyi
  * @date 2021-06-18
@@ -20,10 +20,10 @@ public class CompanyInforServiceImpl implements ICompanyInforService
     private CompanyInforMapper companyInforMapper;
 
     /**
-     * 查询企业管理
+     * 查询用户管理
      * 
-     * @param companyId 企业管理ID
-     * @return 企业管理
+     * @param companyId 用户管理ID
+     * @return 用户管理
      */
     @Override
     public CompanyInfor selectCompanyInforById(Integer companyId)
@@ -32,10 +32,10 @@ public class CompanyInforServiceImpl implements ICompanyInforService
     }
 
     /**
-     * 查询企业管理列表
+     * 查询用户管理列表
      * 
-     * @param companyInfor 企业管理
-     * @return 企业管理
+     * @param companyInfor 用户管理
+     * @return 用户管理
      */
     @Override
     public List<CompanyInfor> selectCompanyInforList(CompanyInfor companyInfor)
@@ -44,9 +44,9 @@ public class CompanyInforServiceImpl implements ICompanyInforService
     }
 
     /**
-     * 新增企业管理
+     * 新增用户管理
      * 
-     * @param companyInfor 企业管理
+     * @param companyInfor 用户管理
      * @return 结果
      */
     @Override
@@ -56,9 +56,9 @@ public class CompanyInforServiceImpl implements ICompanyInforService
     }
 
     /**
-     * 修改企业管理
+     * 修改用户管理
      * 
-     * @param companyInfor 企业管理
+     * @param companyInfor 用户管理
      * @return 结果
      */
     @Override
@@ -68,9 +68,9 @@ public class CompanyInforServiceImpl implements ICompanyInforService
     }
 
     /**
-     * 批量删除企业管理
+     * 批量删除用户管理
      * 
-     * @param companyIds 需要删除的企业管理ID
+     * @param companyIds 需要删除的用户管理ID
      * @return 结果
      */
     @Override
@@ -80,9 +80,9 @@ public class CompanyInforServiceImpl implements ICompanyInforService
     }
 
     /**
-     * 删除企业管理信息
+     * 删除用户管理信息
      * 
-     * @param companyId 企业管理ID
+     * @param companyId 用户管理ID
      * @return 结果
      */
     @Override

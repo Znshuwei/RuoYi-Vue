@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询企业管理列表
+// 查询用户管理列表
 export function listInfor(query) {
   return request({
     url: '/system/infor/list',
@@ -9,7 +9,7 @@ export function listInfor(query) {
   })
 }
 
-// 查询企业管理详细
+// 查询用户管理详细
 export function getInfor(companyId) {
   return request({
     url: '/system/infor/' + companyId,
@@ -17,7 +17,7 @@ export function getInfor(companyId) {
   })
 }
 
-// 新增企业管理
+// 新增用户管理
 export function addInfor(data) {
   return request({
     url: '/system/infor',
@@ -26,7 +26,7 @@ export function addInfor(data) {
   })
 }
 
-// 修改企业管理
+// 修改用户管理
 export function updateInfor(data) {
   return request({
     url: '/system/infor',
@@ -35,7 +35,7 @@ export function updateInfor(data) {
   })
 }
 
-// 删除企业管理
+// 删除用户管理
 export function delInfor(companyId) {
   return request({
     url: '/system/infor/' + companyId,
@@ -43,7 +43,7 @@ export function delInfor(companyId) {
   })
 }
 
-// 导出企业管理
+// 导出用户管理
 export function exportInfor(query) {
   return request({
     url: '/system/infor/export',

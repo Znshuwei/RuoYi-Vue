@@ -8,7 +8,7 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 企业管理对象 company_infor
+ * 用户管理对象 company_infor
  * 
  * @author ruoyi
  * @date 2021-06-18
@@ -18,10 +18,10 @@ public class CompanyInfor extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 企业ID */
+    @Excel(name = "企业ID")
     private Integer companyId;
 
     /** 企业编码 */
-    @Excel(name = "企业编码")
     private String companyCode;
 
     /** 企业名称 */
@@ -73,13 +73,12 @@ public class CompanyInfor extends BaseEntity
     @Excel(name = "注册人")
     private String companyCreateperson;
 
-    /** 创建时间 */
+    /** 注册时间 */
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "创建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @Excel(name = "注册时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date companyCreatedate;
 
     /** 删除标志 */
-    @Excel(name = "删除标志")
     private Integer companyDelflag;
 
     public void setCompanyId(Integer companyId) 

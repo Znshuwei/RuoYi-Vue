@@ -21,7 +21,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 企业管理Controller
+ * 用户管理Controller
  * 
  * @author ruoyi
  * @date 2021-06-18
@@ -34,7 +34,7 @@ public class CompanyInforController extends BaseController
     private ICompanyInforService companyInforService;
 
     /**
-     * 查询企业管理列表
+     * 查询用户管理列表
      */
     @PreAuthorize("@ss.hasPermi('system:infor:list')")
     @GetMapping("/list")
@@ -46,20 +46,20 @@ public class CompanyInforController extends BaseController
     }
 
     /**
-     * 导出企业管理列表
+     * 导出用户管理列表
      */
     @PreAuthorize("@ss.hasPermi('system:infor:export')")
-    @Log(title = "企业管理", businessType = BusinessType.EXPORT)
+    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @GetMapping("/export")
     public AjaxResult export(CompanyInfor companyInfor)
     {
         List<CompanyInfor> list = companyInforService.selectCompanyInforList(companyInfor);
         ExcelUtil<CompanyInfor> util = new ExcelUtil<CompanyInfor>(CompanyInfor.class);
-        return util.exportExcel(list, "企业管理数据");
+        return util.exportExcel(list, "用户管理数据");
     }
 
     /**
-     * 获取企业管理详细信息
+     * 获取用户管理详细信息
      */
     @PreAuthorize("@ss.hasPermi('system:infor:query')")
     @GetMapping(value = "/{companyId}")
@@ -69,10 +69,10 @@ public class CompanyInforController extends BaseController
     }
 
     /**
-     * 新增企业管理
+     * 新增用户管理
      */
     @PreAuthorize("@ss.hasPermi('system:infor:add')")
-    @Log(title = "企业管理", businessType = BusinessType.INSERT)
+    @Log(title = "用户管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CompanyInfor companyInfor)
     {
@@ -80,10 +80,10 @@ public class CompanyInforController extends BaseController
     }
 
     /**
-     * 修改企业管理
+     * 修改用户管理
      */
     @PreAuthorize("@ss.hasPermi('system:infor:edit')")
-    @Log(title = "企业管理", businessType = BusinessType.UPDATE)
+    @Log(title = "用户管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CompanyInfor companyInfor)
     {
@@ -91,10 +91,10 @@ public class CompanyInforController extends BaseController
     }
 
     /**
-     * 删除企业管理
+     * 删除用户管理
      */
     @PreAuthorize("@ss.hasPermi('system:infor:remove')")
-    @Log(title = "企业管理", businessType = BusinessType.DELETE)
+    @Log(title = "用户管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{companyIds}")
     public AjaxResult remove(@PathVariable Integer[] companyIds)
     {

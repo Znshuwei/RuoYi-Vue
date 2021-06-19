@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectCompanyInforList" parameterType="CompanyInfor" resultMap="CompanyInforResult">
         <include refid="selectCompanyInforVo"/>
         <where>  
-            <if test="companyCode != null  and companyCode != ''"> and Company_Code = #{companyCode}</if>
+            <if test="companyId != null "> and Company_Id = #{companyId}</if>
             <if test="companyName != null  and companyName != ''"> and Company_Name like concat('%', #{companyName}, '%')</if>
             <if test="companyArea != null  and companyArea != ''"> and Company_area = #{companyArea}</if>
             <if test="companyLinkmain != null  and companyLinkmain != ''"> and Company_LinkMain = #{companyLinkmain}</if>
