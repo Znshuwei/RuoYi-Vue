@@ -151,10 +151,10 @@
         <el-form-item label="地区" prop="companyArea">
 <!--          <el-input v-model="form.companyArea" placeholder="请输入地区" />-->
           <el-cascader
-            v-model="form.companyArea"
+            ref="demoCascader"
+            v-model="value"
             :options="city"
-            :props="{ expandTrigger: 'hover',value:'cat_id',label:'cat_name'}"
-            @change="handleChange">
+            @change="handleItemChange">
           </el-cascader>
         </el-form-item>
         <el-form-item label="地址" prop="companyAddress">
@@ -199,13 +199,21 @@
       </div>
     </el-dialog>
   </div>
+<!--  <div v-for="i in vals">-->
+<!--    label:{{i.label}} - value{{i.value}}-->
+<!--  </div>-->
 </template>
+
+<!--<script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+<!--<script src="https://unpkg.com/element-ui/lib/index.js"></script>-->
 
 <script>
 import { listInfor, getInfor, delInfor, addInfor, updateInfor, exportInfor } from "@/api/system/infor";
 import axios from "axios";
 
 export default {
+
+
   name: "Infor",
   components: {
   },
@@ -275,7 +283,14 @@ export default {
   },
   methods: {
 
-    handleChange(value) {console.log(value);},
+    handleItemChange(value) {
+      // this.vals=getCascaderObj(value, this.city)
+      // console.log(value);
+      // const obj = this.$refs['demoCascader'].getCheckedNodes(true,true)
+      const obj = this.$refs['demoCascader'].getCheckedNodes()
+      // console.log(obj[0].label)
+      this.form.companyArea = obj[0].label;
+    },
 
     /** 查询用户管理列表 */
     getList() {
