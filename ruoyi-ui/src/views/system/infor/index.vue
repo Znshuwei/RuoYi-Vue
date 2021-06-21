@@ -91,13 +91,13 @@
     </el-row>
 
     <el-table v-loading="loading" :data="inforList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="企业ID" align="center" prop="companyId" />
+      <el-table-column type="selection" width="45" align="center" />
+      <el-table-column label="企业ID" width="65" align="center" prop="companyId" />
       <el-table-column label="企业名称" align="center" prop="companyName" />
-      <el-table-column label="地区" align="center" prop="companyArea" />
+      <el-table-column label="地区" width="200" align="center" prop="companyArea" />
       <el-table-column label="地址" align="center" prop="companyAddress" />
       <el-table-column label="联系人" align="center" prop="companyLinkmain" />
-      <el-table-column label="联系方式" align="center" prop="companyPhone" />
+      <el-table-column label="联系方式" width="110" align="center" prop="companyPhone" />
       <el-table-column label="建立时间" align="center" prop="companySetuptime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.companySetuptime, '{y}-{m}-{d}') }}</span>
@@ -287,9 +287,10 @@ export default {
       // this.vals=getCascaderObj(value, this.city)
       // console.log(value);
       // const obj = this.$refs['demoCascader'].getCheckedNodes(true,true)
-      const obj = this.$refs['demoCascader'].getCheckedNodes()
+      const obj = this.$refs['demoCascader'].getCheckedNodes();
+      console.log(obj)
       // console.log(obj[0].label)
-      this.form.companyArea = obj[0].label;
+      this.form.companyArea = obj[0].pathLabels[0]+"/"+obj[0].pathLabels[1]+"/"+obj[0].pathLabels[2];
     },
 
     /** 查询用户管理列表 */
