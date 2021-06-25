@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CncunitManageDeviceMapper">
+    
+    <resultMap type="CncunitManageDevice" id="CncunitManageDeviceResult">
+        <result property="manageDeviceId"    column="manage_device_ID"    />
+        <result property="manageDeviceName"    column="manage_device_Name"    />
+        <result property="manageDeviceModel"    column="manage_device_Model"    />
+        <result property="manageDeviceWkshopid"    column="manage_device_WkshopID"    />
+        <result property="manageDeviceRunstatus"    column="manage_device_RunStatus"    />
+        <result property="manageDeviceRundate"    column="manage_device_RunDate"    />
+        <result property="manageDeviceRunhours"    column="manage_device_RunHours"    />
+        <result property="manageDeviceScrapflag"    column="manage_device_ScrapFlag"    />
+        <result property="manageDeviceDelflag"    column="manage_device_DelFlag"    />
+        <result property="manageDeviceRemark"    column="manage_device_Remark"    />
+    </resultMap>
+
+    <sql id="selectCncunitManageDeviceVo">
+        select manage_device_ID, manage_device_Name, manage_device_Model, manage_device_WkshopID, manage_device_RunStatus, manage_device_RunDate, manage_device_RunHours, manage_device_ScrapFlag, manage_device_DelFlag, manage_device_Remark from cncunit_manage_device
+    </sql>
+
+    <select id="selectCncunitManageDeviceList" parameterType="CncunitManageDevice" resultMap="CncunitManageDeviceResult">
+        <include refid="selectCncunitManageDeviceVo"/>
+        <where>  
+            <if test="manageDeviceName != null  and manageDeviceName != ''"> and manage_device_Name like concat('%', #{manageDeviceName}, '%')</if>
+            <if test="manageDeviceModel != null  and manageDeviceModel != ''"> and manage_device_Model = #{manageDeviceModel}</if>
+            <if test="manageDeviceWkshopid != null  and manageDeviceWkshopid != ''"> and manage_device_WkshopID = #{manageDeviceWkshopid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCncunitManageDeviceById" parameterType="String" resultMap="CncunitManageDeviceResult">
+        <include refid="selectCncunitManageDeviceVo"/>
+        where manage_device_ID = #{manageDeviceId}
+    </select>
+        
+    <insert id="insertCncunitManageDevice" parameterType="CncunitManageDevice">
+        insert into cncunit_manage_device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="manageDeviceId != null">manage_device_ID,</if>
+            <if test="manageDeviceName != null and manageDeviceName != ''">manage_device_Name,</if>
+            <if test="manageDeviceModel != null and manageDeviceModel != ''">manage_device_Model,</if>
+            <if test="manageDeviceWkshopid != null and manageDeviceWkshopid != ''">manage_device_WkshopID,</if>
+            <if test="manageDeviceRunstatus != null">manage_device_RunStatus,</if>
+            <if test="manageDeviceRundate != null">manage_device_RunDate,</if>
+            <if test="manageDeviceRunhours != null">manage_device_RunHours,</if>
+            <if test="manageDeviceScrapflag != null">manage_device_ScrapFlag,</if>
+            <if test="manageDeviceDelflag != null">manage_device_DelFlag,</if>
+            <if test="manageDeviceRemark != null">manage_device_Remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="manageDeviceId != null">#{manageDeviceId},</if>
+            <if test="manageDeviceName != null and manageDeviceName != ''">#{manageDeviceName},</if>
+            <if test="manageDeviceModel != null and manageDeviceModel != ''">#{manageDeviceModel},</if>
+            <if test="manageDeviceWkshopid != null and manageDeviceWkshopid != ''">#{manageDeviceWkshopid},</if>
+            <if test="manageDeviceRunstatus != null">#{manageDeviceRunstatus},</if>
+            <if test="manageDeviceRundate != null">#{manageDeviceRundate},</if>
+            <if test="manageDeviceRunhours != null">#{manageDeviceRunhours},</if>
+            <if test="manageDeviceScrapflag != null">#{manageDeviceScrapflag},</if>
+            <if test="manageDeviceDelflag != null">#{manageDeviceDelflag},</if>
+            <if test="manageDeviceRemark != null">#{manageDeviceRemark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCncunitManageDevice" parameterType="CncunitManageDevice">
+        update cncunit_manage_device
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="manageDeviceName != null and manageDeviceName != ''">manage_device_Name = #{manageDeviceName},</if>
+            <if test="manageDeviceModel != null and manageDeviceModel != ''">manage_device_Model = #{manageDeviceModel},</if>
+            <if test="manageDeviceWkshopid != null and manageDeviceWkshopid != ''">manage_device_WkshopID = #{manageDeviceWkshopid},</if>
+            <if test="manageDeviceRunstatus != null">manage_device_RunStatus = #{manageDeviceRunstatus},</if>
+            <if test="manageDeviceRundate != null">manage_device_RunDate = #{manageDeviceRundate},</if>
+            <if test="manageDeviceRunhours != null">manage_device_RunHours = #{manageDeviceRunhours},</if>
+            <if test="manageDeviceScrapflag != null">manage_device_ScrapFlag = #{manageDeviceScrapflag},</if>
+            <if test="manageDeviceDelflag != null">manage_device_DelFlag = #{manageDeviceDelflag},</if>
+            <if test="manageDeviceRemark != null">manage_device_Remark = #{manageDeviceRemark},</if>
+        </trim>
+        where manage_device_ID = #{manageDeviceId}
+    </update>
+
+    <delete id="deleteCncunitManageDeviceById" parameterType="String">
+        delete from cncunit_manage_device where manage_device_ID = #{manageDeviceId}
+    </delete>
+
+    <delete id="deleteCncunitManageDeviceByIds" parameterType="String">
+        delete from cncunit_manage_device where manage_device_ID in 
+        <foreach item="manageDeviceId" collection="array" open="(" separator="," close=")">
+            #{manageDeviceId}
+        </foreach>
+    </delete>
+</mapper>
