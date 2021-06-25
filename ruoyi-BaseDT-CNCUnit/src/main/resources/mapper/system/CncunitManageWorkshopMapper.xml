@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CncunitManageWorkshopMapper">
+    
+    <resultMap type="CncunitManageWorkshop" id="CncunitManageWorkshopResult">
+        <result property="manageWorkshopId"    column="manage_workshop_ID"    />
+        <result property="manageWorkshopName"    column="manage_workshop_Name"    />
+        <result property="manageWorkshopArea"    column="manage_workshop_Area"    />
+        <result property="manageWorkshopAddress"    column="manage_workshop_Address"    />
+        <result property="manageWorkshopManager"    column="manage_workshop_Manager"    />
+        <result property="manageWorkshopMngphone"    column="manage_workshop_MngPhone"    />
+        <result property="manageWorkshopCreatetime"    column="manage_workshop_CreateTime"    />
+        <result property="manageWorkshopStatusflag"    column="manage_workshop_StatusFlag"    />
+        <result property="manageWorkshopDelflag"    column="manage_workshop_DelFlag"    />
+        <result property="manageWorkshopRemark"    column="manage_workshop_Remark"    />
+    </resultMap>
+
+    <sql id="selectCncunitManageWorkshopVo">
+        select manage_workshop_ID, manage_workshop_Name, manage_workshop_Area, manage_workshop_Address, manage_workshop_Manager, manage_workshop_MngPhone, manage_workshop_CreateTime, manage_workshop_StatusFlag, manage_workshop_DelFlag, manage_workshop_Remark from cncunit_manage_workshop
+    </sql>
+
+    <select id="selectCncunitManageWorkshopList" parameterType="CncunitManageWorkshop" resultMap="CncunitManageWorkshopResult">
+        <include refid="selectCncunitManageWorkshopVo"/>
+        <where>  
+            <if test="manageWorkshopName != null  and manageWorkshopName != ''"> and manage_workshop_Name like concat('%', #{manageWorkshopName}, '%')</if>
+            <if test="manageWorkshopArea != null  and manageWorkshopArea != ''"> and manage_workshop_Area = #{manageWorkshopArea}</if>
+            <if test="manageWorkshopManager != null  and manageWorkshopManager != ''"> and manage_workshop_Manager = #{manageWorkshopManager}</if>
+            <if test="manageWorkshopStatusflag != null  and manageWorkshopStatusflag != ''"> and manage_workshop_StatusFlag = #{manageWorkshopStatusflag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCncunitManageWorkshopById" parameterType="String" resultMap="CncunitManageWorkshopResult">
+        <include refid="selectCncunitManageWorkshopVo"/>
+        where manage_workshop_ID = #{manageWorkshopId}
+    </select>
+        
+    <insert id="insertCncunitManageWorkshop" parameterType="CncunitManageWorkshop">
+        insert into cncunit_manage_workshop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="manageWorkshopId != null and manageWorkshopId != ''">manage_workshop_ID,</if>
+            <if test="manageWorkshopName != null and manageWorkshopName != ''">manage_workshop_Name,</if>
+            <if test="manageWorkshopArea != null and manageWorkshopArea != ''">manage_workshop_Area,</if>
+            <if test="manageWorkshopAddress != null and manageWorkshopAddress != ''">manage_workshop_Address,</if>
+            <if test="manageWorkshopManager != null and manageWorkshopManager != ''">manage_workshop_Manager,</if>
+            <if test="manageWorkshopMngphone != null and manageWorkshopMngphone != ''">manage_workshop_MngPhone,</if>
+            <if test="manageWorkshopCreatetime != null">manage_workshop_CreateTime,</if>
+            <if test="manageWorkshopStatusflag != null and manageWorkshopStatusflag != ''">manage_workshop_StatusFlag,</if>
+            <if test="manageWorkshopDelflag != null">manage_workshop_DelFlag,</if>
+            <if test="manageWorkshopRemark != null">manage_workshop_Remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="manageWorkshopId != null and manageWorkshopId != ''">#{manageWorkshopId},</if>
+            <if test="manageWorkshopName != null and manageWorkshopName != ''">#{manageWorkshopName},</if>
+            <if test="manageWorkshopArea != null and manageWorkshopArea != ''">#{manageWorkshopArea},</if>
+            <if test="manageWorkshopAddress != null and manageWorkshopAddress != ''">#{manageWorkshopAddress},</if>
+            <if test="manageWorkshopManager != null and manageWorkshopManager != ''">#{manageWorkshopManager},</if>
+            <if test="manageWorkshopMngphone != null and manageWorkshopMngphone != ''">#{manageWorkshopMngphone},</if>
+            <if test="manageWorkshopCreatetime != null">#{manageWorkshopCreatetime},</if>
+            <if test="manageWorkshopStatusflag != null and manageWorkshopStatusflag != ''">#{manageWorkshopStatusflag},</if>
+            <if test="manageWorkshopDelflag != null">#{manageWorkshopDelflag},</if>
+            <if test="manageWorkshopRemark != null">#{manageWorkshopRemark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCncunitManageWorkshop" parameterType="CncunitManageWorkshop">
+        update cncunit_manage_workshop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="manageWorkshopName != null and manageWorkshopName != ''">manage_workshop_Name = #{manageWorkshopName},</if>
+            <if test="manageWorkshopArea != null and manageWorkshopArea != ''">manage_workshop_Area = #{manageWorkshopArea},</if>
+            <if test="manageWorkshopAddress != null and manageWorkshopAddress != ''">manage_workshop_Address = #{manageWorkshopAddress},</if>
+            <if test="manageWorkshopManager != null and manageWorkshopManager != ''">manage_workshop_Manager = #{manageWorkshopManager},</if>
+            <if test="manageWorkshopMngphone != null and manageWorkshopMngphone != ''">manage_workshop_MngPhone = #{manageWorkshopMngphone},</if>
+            <if test="manageWorkshopCreatetime != null">manage_workshop_CreateTime = #{manageWorkshopCreatetime},</if>
+            <if test="manageWorkshopStatusflag != null and manageWorkshopStatusflag != ''">manage_workshop_StatusFlag = #{manageWorkshopStatusflag},</if>
+            <if test="manageWorkshopDelflag != null">manage_workshop_DelFlag = #{manageWorkshopDelflag},</if>
+            <if test="manageWorkshopRemark != null">manage_workshop_Remark = #{manageWorkshopRemark},</if>
+        </trim>
+        where manage_workshop_ID = #{manageWorkshopId}
+    </update>
+
+    <delete id="deleteCncunitManageWorkshopById" parameterType="String">
+        delete from cncunit_manage_workshop where manage_workshop_ID = #{manageWorkshopId}
+    </delete>
+
+    <delete id="deleteCncunitManageWorkshopByIds" parameterType="String">
+        delete from cncunit_manage_workshop where manage_workshop_ID in 
+        <foreach item="manageWorkshopId" collection="array" open="(" separator="," close=")">
+            #{manageWorkshopId}
+        </foreach>
+    </delete>
+</mapper>
