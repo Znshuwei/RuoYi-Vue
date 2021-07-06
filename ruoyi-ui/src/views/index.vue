@@ -149,7 +149,7 @@
         </el-card>
         <el-card class="update-log">
           <div slot="header" class="clearfix">
-            <span>数控加工单元的数字孪生</span>
+            <span>数控加工单元数字孪生</span>
           </div>
           <div class="body">
             <p>
