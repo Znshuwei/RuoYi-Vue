@@ -107,37 +107,100 @@
       <el-col :xs="24" :sm="24" :md="12" :lg="8">
         <el-card class="update-log">
           <div slot="header" class="clearfix">
-            <span>联系信息</span>
+            <span>网络化协同制造平台</span>
           </div>
           <div class="body">
             <p>
-              <i class="el-icon-s-promotion"></i> 官网：<el-link
-                href="http://www.ruoyi.vip"
-                target="_blank"
-                >http://www.ruoyi.vip</el-link
-              >
+<!--&lt;!&ndash;         <i class="el-icon-s-promotion"></i> &ndash;&gt;-->
+<!--              官网：<el-link-->
+<!--                href="http://www.ruoyi.vip"-->
+<!--                target="_blank"-->
+<!--                >http://www.ruoyi.vip</el-link-->
+<!--              >-->
+<!--            </p>-->
+<!--            <p>-->
+<!--              <i class="el-icon-user-solid"></i> QQ群：<s>满937441</s>-->
+<!--              <s>满887144332</s> <s>满180251782</s> <s>满104180207</s>-->
+<!--              <s>满186866453</s>-->
+<!--              <a href="https://jq.qq.com/?_wv=1027&k=5vYAqA05" target="_blank">-->
+<!--                201396349</a-->
+<!--              >-->
+<!--            </p>-->
+            <p>
+            <i class="el-icon-check"></i>企业管理<a href="javascript:;"></a>
             </p>
             <p>
-              <i class="el-icon-user-solid"></i> QQ群：<s>满937441</s>
-              <s>满887144332</s> <s>满180251782</s> <s>满104180207</s>
-              <s>满186866453</s>
-              <a href="https://jq.qq.com/?_wv=1027&k=5vYAqA05" target="_blank">
-                201396349</a
-              >
+              <i class="el-icon-check"></i>用户管理<a href="javascript:;"></a>
             </p>
             <p>
-              <i class="el-icon-chat-dot-round"></i> 微信：<a
-                href="javascript:;"
-                >/ *若依</a
-              >
+              <i class="el-icon-check"></i>角色管理<a href="javascript:;"></a>
             </p>
             <p>
-              <i class="el-icon-money"></i> 支付宝：<a
-                href="javascript:;"
-                class="支付宝信息"
-                >/ *若依</a
-              >
+              <i class="el-icon-check"></i>用户种类管理<a href="javascript:;"></a>
             </p>
+            <p>
+              <i class="el-icon-check"></i>资产管理<a href="javascript:;"></a>
+            </p>
+            <p>
+              <i class="el-icon-check"></i>...<a href="javascript:;"></a>
+            </p>
+
+          </div>
+        </el-card>
+        <el-card class="update-log">
+          <div slot="header" class="clearfix">
+            <span>数控加工单元的数字孪生</span>
+          </div>
+          <div class="body">
+            <p>
+              <!--&lt;!&ndash;         <i class="el-icon-s-promotion"></i> &ndash;&gt;-->
+              <!--              官网：<el-link-->
+              <!--                href="http://www.ruoyi.vip"-->
+              <!--                target="_blank"-->
+              <!--                >http://www.ruoyi.vip</el-link-->
+              <!--              >-->
+              <!--            </p>-->
+              <!--            <p>-->
+              <!--              <i class="el-icon-user-solid"></i> QQ群：<s>满937441</s>-->
+              <!--              <s>满887144332</s> <s>满180251782</s> <s>满104180207</s>-->
+              <!--              <s>满186866453</s>-->
+              <!--              <a href="https://jq.qq.com/?_wv=1027&k=5vYAqA05" target="_blank">-->
+              <!--                201396349</a-->
+              <!--              >-->
+              <!--            </p>-->
+            <p>
+              <i class="el-icon-eleme"></i>数控机床管理<a href="javascript:;"></a>
+            </p>
+            <p>
+              <i class="el-icon-check"></i>加工单元可视化<a href="javascript:;"></a>
+            </p>
+            <p>
+              <i class="el-icon-check"></i>加工过程监控<a href="javascript:;"></a>
+            </p>
+            <p>
+              <i class="el-icon-check"></i>机床数据采集、储存、展示<a href="javascript:;"></a>
+            </p>
+            <p>
+              <i class="el-icon-check"></i>...<a href="javascript:;"></a>
+            </p>
+
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :xs="24" :sm="24" :md="12" :lg="8">
+        <el-card class="update-log">
+          <div slot="header" class="clearfix">
+            <span>联系作者</span>
+          </div>
+          <div class="body">
+            <img
+              src="../assets/images/Image 001.png"
+              alt="donate"
+              width="70%"
+            />
+            <!--            <span style="display: inline-block; height: 30px; line-height: 30px"-->
+            <!--              >你可以请作者喝杯咖啡表示鼓励</span-->
+            <!--            >-->
           </div>
         </el-card>
       </el-col>
@@ -539,24 +602,8 @@
           </el-collapse>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="8">
-        <el-card class="update-log">
-          <div slot="header" class="clearfix">
-            <span>捐赠支持</span>
-          </div>
-          <div class="body">
-            <img
-              src="https://oscimg.oschina.net/oscnet/up-d6695f82666e5018f715c41cb7ee60d3b73.png"
-              alt="donate"
-              width="100%"
-            />
-            <span style="display: inline-block; height: 30px; line-height: 30px"
-              >你可以请作者喝杯咖啡表示鼓励</span
-            >
-          </div>
-        </el-card>
-      </el-col>
     </el-row>
+
   </div>
 </template>
 

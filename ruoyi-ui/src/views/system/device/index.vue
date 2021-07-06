@@ -87,7 +87,7 @@
       <el-table-column label="设备名称" align="center" prop="manageDeviceName" />
       <el-table-column label="设备型号" align="center" prop="manageDeviceModel" />
       <el-table-column label="设备所属车间ID" align="center" prop="manageDeviceWkshopid" />
-      <el-table-column label="设备运行状态" align="center" prop="manageDeviceRunstatus" />
+      <el-table-column label="设备运行状态" align="center" prop="manageDeviceRunstatus" :formatter="manageDeviceRunstatusFormat" />
       <el-table-column label="设备开始运行日期" align="center" prop="manageDeviceRundate" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.manageDeviceRundate, '{y}-{m}-{d}') }}</span>
@@ -139,7 +139,11 @@
         </el-form-item>
         <el-form-item label="设备运行状态">
           <el-radio-group v-model="form.manageDeviceRunstatus">
-            <el-radio label="1">请选择字典生成</el-radio>
+            <el-radio
+              v-for="dict in manageDeviceRunstatusOptions"
+              :key="dict.dictValue"
+              :label="parseInt(dict.dictValue)"
+            >{{dict.dictLabel}}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="设备开始运行日期" prop="manageDeviceRundate">
@@ -200,6 +204,8 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      // 设备运行状态字典
+      manageDeviceRunstatusOptions: [],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -241,6 +247,9 @@ export default {
   },
   created() {
     this.getList();
+    this.getDicts("cncunit_device_status").then(response => {
+      this.manageDeviceRunstatusOptions = response.data;
+    });
   },
   methods: {
     /** 查询设备数据列表 */
@@ -251,6 +260,10 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
+    },
+    // 设备运行状态字典翻译
+    manageDeviceRunstatusFormat(row, column) {
+      return this.selectDictLabel(this.manageDeviceRunstatusOptions, row.manageDeviceRunstatus);
     },
     // 取消按钮
     cancel() {

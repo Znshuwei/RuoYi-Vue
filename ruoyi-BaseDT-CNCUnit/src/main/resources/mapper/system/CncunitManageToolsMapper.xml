@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CncunitManageToolsMapper">
+    
+    <resultMap type="CncunitManageTools" id="CncunitManageToolsResult">
+        <result property="manageToolsId"    column="manage_tools_ID"    />
+        <result property="manageToolsName"    column="manage_tools_Name"    />
+        <result property="manageToolsModel"    column="manage_tools_Model"    />
+        <result property="manageToolsMaterial"    column="manage_tools_Material"    />
+        <result property="manageToolsBlades"    column="manage_tools_Blades"    />
+        <result property="manageToolsPrice"    column="manage_tools_Price"    />
+        <result property="manageToolsWkshopid"    column="manage_tools_WkshopID"    />
+        <result property="manageToolsNumber"    column="manage_tools_Number"    />
+        <result property="manageToolsRemark"    column="manage_tools_Remark"    />
+    </resultMap>
+
+    <sql id="selectCncunitManageToolsVo">
+        select manage_tools_ID, manage_tools_Name, manage_tools_Model, manage_tools_Material, manage_tools_Blades, manage_tools_Price, manage_tools_WkshopID, manage_tools_Number, manage_tools_Remark from cncunit_manage_tools
+    </sql>
+
+    <select id="selectCncunitManageToolsList" parameterType="CncunitManageTools" resultMap="CncunitManageToolsResult">
+        <include refid="selectCncunitManageToolsVo"/>
+        <where>  
+            <if test="manageToolsName != null  and manageToolsName != ''"> and manage_tools_Name like concat('%', #{manageToolsName}, '%')</if>
+            <if test="manageToolsModel != null  and manageToolsModel != ''"> and manage_tools_Model = #{manageToolsModel}</if>
+            <if test="manageToolsWkshopid != null  and manageToolsWkshopid != ''"> and manage_tools_WkshopID = #{manageToolsWkshopid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCncunitManageToolsById" parameterType="String" resultMap="CncunitManageToolsResult">
+        <include refid="selectCncunitManageToolsVo"/>
+        where manage_tools_ID = #{manageToolsId}
+    </select>
+        
+    <insert id="insertCncunitManageTools" parameterType="CncunitManageTools">
+        insert into cncunit_manage_tools
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="manageToolsId != null">manage_tools_ID,</if>
+            <if test="manageToolsName != null and manageToolsName != ''">manage_tools_Name,</if>
+            <if test="manageToolsModel != null and manageToolsModel != ''">manage_tools_Model,</if>
+            <if test="manageToolsMaterial != null and manageToolsMaterial != ''">manage_tools_Material,</if>
+            <if test="manageToolsBlades != null">manage_tools_Blades,</if>
+            <if test="manageToolsPrice != null">manage_tools_Price,</if>
+            <if test="manageToolsWkshopid != null and manageToolsWkshopid != ''">manage_tools_WkshopID,</if>
+            <if test="manageToolsNumber != null">manage_tools_Number,</if>
+            <if test="manageToolsRemark != null">manage_tools_Remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="manageToolsId != null">#{manageToolsId},</if>
+            <if test="manageToolsName != null and manageToolsName != ''">#{manageToolsName},</if>
+            <if test="manageToolsModel != null and manageToolsModel != ''">#{manageToolsModel},</if>
+            <if test="manageToolsMaterial != null and manageToolsMaterial != ''">#{manageToolsMaterial},</if>
+            <if test="manageToolsBlades != null">#{manageToolsBlades},</if>
+            <if test="manageToolsPrice != null">#{manageToolsPrice},</if>
+            <if test="manageToolsWkshopid != null and manageToolsWkshopid != ''">#{manageToolsWkshopid},</if>
+            <if test="manageToolsNumber != null">#{manageToolsNumber},</if>
+            <if test="manageToolsRemark != null">#{manageToolsRemark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCncunitManageTools" parameterType="CncunitManageTools">
+        update cncunit_manage_tools
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="manageToolsName != null and manageToolsName != ''">manage_tools_Name = #{manageToolsName},</if>
+            <if test="manageToolsModel != null and manageToolsModel != ''">manage_tools_Model = #{manageToolsModel},</if>
+            <if test="manageToolsMaterial != null and manageToolsMaterial != ''">manage_tools_Material = #{manageToolsMaterial},</if>
+            <if test="manageToolsBlades != null">manage_tools_Blades = #{manageToolsBlades},</if>
+            <if test="manageToolsPrice != null">manage_tools_Price = #{manageToolsPrice},</if>
+            <if test="manageToolsWkshopid != null and manageToolsWkshopid != ''">manage_tools_WkshopID = #{manageToolsWkshopid},</if>
+            <if test="manageToolsNumber != null">manage_tools_Number = #{manageToolsNumber},</if>
+            <if test="manageToolsRemark != null">manage_tools_Remark = #{manageToolsRemark},</if>
+        </trim>
+        where manage_tools_ID = #{manageToolsId}
+    </update>
+
+    <delete id="deleteCncunitManageToolsById" parameterType="String">
+        delete from cncunit_manage_tools where manage_tools_ID = #{manageToolsId}
+    </delete>
+
+    <delete id="deleteCncunitManageToolsByIds" parameterType="String">
+        delete from cncunit_manage_tools where manage_tools_ID in 
+        <foreach item="manageToolsId" collection="array" open="(" separator="," close=")">
+            #{manageToolsId}
+        </foreach>
+    </delete>
+</mapper>
